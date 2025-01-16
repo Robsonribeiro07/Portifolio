@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProjectsCard } from "./components/projects";
 import { GetProjects, ResponseProjects } from "@/api/get-project";
-import { p } from "node_modules/react-router/dist/development/fog-of-war-BhhVTjSZ.d.mts";
 
 export function CardContents() {
 
 
-    const {data: projectsData, isFetched} = useQuery<ResponseProjects>({
+    const {data: projectsData} = useQuery<ResponseProjects>({
       queryKey: ['projects'],
       queryFn: GetProjects
     })

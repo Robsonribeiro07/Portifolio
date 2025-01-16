@@ -2,13 +2,21 @@ import { Helmet } from "react-helmet-async";
 import { ProjectsCard } from "../Home/components/projects";
 import { SkilCard } from "../Home/components/skilscard"
 import { useEffect, useRef, useState } from "react";
-
+import { useQuery } from "@tanstack/react-query";
+import { GetProjects } from "@/api/get-project";
 export function ProjectsPage() {
+
+
 
     const [isVisible, setIsVisible] = useState<{[key: string]: boolean}>({});
 
     const cardElements = useRef<HTMLDivElement | null>(null);
     const SmallElements = useRef<HTMLDivElement | null>(null);
+
+    const {data: projects} = useQuery({
+        queryKey: ['projects'],
+        queryFn: GetProjects
+    })
 
 
     useEffect(() => {
@@ -67,13 +75,13 @@ export function ProjectsPage() {
 
 
             <div className={`grid grid-cols-1 lg:grid-cols-4  h-[fit-content] gap-3 mt-11 ${isVisible['cardElement'] ? 'animate-SlideInFadeInRight' : 'opacity-0'}`} id="cardElement" ref={cardElements}>
-                <ProjectsCard/>
-                <ProjectsCard/>
-                <ProjectsCard/>
-                <ProjectsCard/>
-                <ProjectsCard/>
-                <ProjectsCard/>
-                <ProjectsCard/>
+              {projects ? projects.map(project => {
+                return (
+                  <ProjectsCard Description={project.Descriptions} img={project.BannerImage} Title={project.Title} Techs={project.Techs} MoreDetails={project.MoreDetails} />
+                )
+              }): (
+                <p>Loading...</p>
+              )}
             </div>
 
             <div className={isVisible['smallElement'] ? 'animate-SlideInFadeIn' : ''} id="smallElement" ref={SmallElements}> 

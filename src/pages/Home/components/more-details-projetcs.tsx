@@ -1,8 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { DialogContent } from "@/components/ui/dialog";
 import { PageDetailsMore } from "./page-details-more";
-import { p } from "node_modules/react-router/dist/development/fog-of-war-BhhVTjSZ.d.mts";
-import { useState } from "react";
 
 
 interface ProjeCardProps extends React.HtmlHTMLAttributes<HTMLDivElement> {

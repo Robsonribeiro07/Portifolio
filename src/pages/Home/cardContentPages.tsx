@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProjectsCard } from "./components/projects";
 import { GetProjects, ResponseProjects } from "@/api/get-project";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function CardContents() {
 
@@ -24,7 +25,10 @@ export function CardContents() {
             })
             
          ): (
-            <p>Loading...</p>
+            Array.from({length: Math.round(Math.random() * 3)}).map((_, index) => (
+                <Skeleton key={index} />
+ 
+            ))
          )}
         </div>
 

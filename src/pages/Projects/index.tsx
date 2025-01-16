@@ -4,6 +4,7 @@ import { SkilCard } from "../Home/components/skilscard"
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { GetProjects } from "@/api/get-project";
+import { Skeleton } from "@/components/ui/skeleton";
 export function ProjectsPage() {
 
 
@@ -80,7 +81,12 @@ export function ProjectsPage() {
                   <ProjectsCard Description={project.Descriptions} img={project.BannerImage} Title={project.Title} Techs={project.Techs} MoreDetails={project.MoreDetails} />
                 )
               }): (
-                <p>Loading...</p>
+               <div className="min-w-[80vw] gap-5 flex">
+                {  Array.from({length: Math.round(Math.random() * 3)}).map((_, index) => (
+                    <Skeleton key={index} className="w-[23vw] h-[55vh] ml-5"/>
+     
+                ))}
+               </div>
               )}
             </div>
 

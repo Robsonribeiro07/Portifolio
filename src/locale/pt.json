@@ -1,0 +1,24 @@
+{
+    "HomePage": {
+    "RobsonIsdeveloper": "Ola me chamo",
+    "Name": " Robson",
+    "Skill": "fron-end developer",
+    "HereCrafts": "crio sites responsivos onde as tecnologias se encontram criatividade",
+    "WithGreat": "Com grande energia vem uma grande conta de luz",
+    "Projects": "projetos",
+    "ViewAll": "Ver todos >",
+    "AboutMe": "Sou um desenvolvedor front-end autodidata. Posso desenvolver sites responsivos do zero e transformá-los em experiências web modernas e fáceis de usar.Transformar minha criatividade e conhecimento em sites tem sido minha paixão há mais de um ano. Tenho ajudado vários clientes a estabelecerem a sua presença online. Eu sempre me esforço para aprender sobre as mais novas tecnologias e estruturas",
+    "AboutTitle": "sobre",
+    "ViewAllAbout": "Ver Tudo ->"
+
+
+
+    },
+
+    "Header": {
+        "Home": "Home",
+        "About": "Sobre",
+        "Projects": "Projetos"
+
+    }
+}

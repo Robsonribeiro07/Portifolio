@@ -23,6 +23,20 @@ module.exports = {
 					transform: 'translateX(0)', // Volta para a posição original
                     opacity: 1, // Fica visível
 
+			}},
+			FadeIns: {
+				'0%': {
+					transform: 'translateX(-50%)', // Começa fora da tela à esquerda
+					opacity: 0, // Começa invisível
+				},
+				'50%': {
+					transform: 'translateX(0)', // Vai para a posição original (centro)
+					opacity: 0.4, // Fica visível
+				},
+				'100%' :{
+					transform: 'translateX(0)', // Volta para a posição original
+                    opacity: 1, // Fica visível
+
 			}}
 			,
 			FadeInRight: {
@@ -36,6 +50,21 @@ module.exports = {
 				},
 				'100%' :{
 					transform: 'translateX(0)', // Volta para a posição original
+                    opacity: 1, // Fica visível
+
+			}},
+			FadeInRightFooter: {
+				'0%': {
+					transform: 'translateX(10%)', // Começa fora da tela à esquerda
+					opacity: 0, // Começa invisível
+
+				},
+				'50%': {
+					transform: 'translateX(-15vw)', // Vai para a posição original (centro)
+					opacity: 0.4, // Fica visível
+				},
+				'100%' :{
+					transform: 'translateX(-15vw)', // Volta para a posição original
                     opacity: 1, // Fica visível
 
 			}}
@@ -76,12 +105,29 @@ module.exports = {
                 width: '100%',
             }
 		},
+		fadeInBottom: {
+			'0%': {
+			  bottom: '-100px',  // Começa com bottom negativo, fora da tela
+			  opacity: 0,        // Começa invisível
+			},
+			'50%': {
+			  bottom: '10px',    // Vai subindo um pouco (ainda abaixo da posição final)
+			  opacity: 0.5,      // Fica meio visível
+			},
+			'100%': {
+			  bottom: '0px',     // Chega na posição final, no bottom igual a 0
+			  opacity: 1,        // Fica completamente visível
+			},
+		  },
 		animation: {
 			SlideInFadeIn: 'FadeIn 1.5s ease',
 			SlideOut: "FadeOut 1s ease",
 			SlideInFadeInRight: "FadeInRight 1.5s ease",
 			SlideInTop: 'FadeInTop 1s ease',
-			IncreaseWidth: 'IncreaseWidth 3s ease ',
+			IncreaseWidth: 'IncreaseWidth 3s ease',
+			FadeInBotton: 'fadeInBottom 1.5s ease',
+			FadeInRightFooter: 'FadeInRightFooter 1.5s ease forwards',
+			FadeInRightSS: 'FadeIns 1.5s ease ',
 		},
   		colors: {
   			background: 'hsl(var(--background))',
@@ -114,6 +160,9 @@ module.exports = {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
+			purple: {
+				DEFAULT: '#c470db'
+			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',

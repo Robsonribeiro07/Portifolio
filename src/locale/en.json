@@ -1,0 +1,23 @@
+{
+    "HomePage": {
+    "RobsonIsdeveloper": "Ola my  name",
+    "Name": " Robson",
+    "Skill": "fron-end developer",
+    "HereCrafts": "He crafts responsive websites where technologies meet creativity",
+    "WithGreat": "With great power comes great electricity bill",
+    "Projects": "projects",
+    "ViewAll": "View all >",
+    "AboutMe": "I’m a self-taught front-end developer  I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.    Transforming my creativity and knowledge into a websites has been my passion for over a year. I have been helping various clients to establish their presence online. I always strive to learn about the newest technologies and frameworks",
+    "ViewAllAbout": "View All ->",
+    "AboutTitle": "about"
+
+
+    },
+
+    "Header": {
+        "Home": "Home",
+        "About": "About",
+        "Projects": "Projects"
+
+    }
+}

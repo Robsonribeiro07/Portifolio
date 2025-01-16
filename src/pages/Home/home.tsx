@@ -1,24 +1,32 @@
 import { Button } from '@/components/ui/button';
 import Banner2 from '../../assets/banner2.svg'
 import { Texterea } from './components/texterea';
-import { ProjectsCard } from './components/projects';
 import { useEffect, useRef, useState } from 'react';
 import BannerSvg from '../../assets/banner.svg';
 import { SkilCard } from './components/skilscard';
 import skillSvg from '../../assets/skills.svg'
 import BanneAbout from '../../assets/bannerAbout.svg'
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { Envelope, InstagramLogo } from '@phosphor-icons/react';
+import { CardContents } from './cardContentPages';
 
 export function HomePage() {
+  
+  const {t} = useTranslation()
   const [isVisible, setIsVisible] = useState<{[key: string]: boolean}>({});
   const elementRef = useRef<HTMLDivElement | null>(null);
   const elementRef2 = useRef<HTMLDivElement | null>(null);
   const SkillElement = useRef<HTMLDivElement | null>(null);
 
+
   const AboutImgElement = useRef<HTMLDivElement | null>(null);
   const IsLargerScrenn = window.innerWidth > 768;
+  const contactRef = useRef<HTMLDivElement | null>(null);
   
   useEffect(() => {
+
+  
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -36,7 +44,7 @@ export function HomePage() {
           }
         }
       },
-      { threshold: 0.1} // Gatilho ao atingir 10% de visibilidade
+      { threshold: 0} // Gatilho ao atingir 10% de visibilidade
     );
 
     if (elementRef.current) {
@@ -53,15 +61,13 @@ export function HomePage() {
     if(AboutImgElement.current) {
       observer.observe(AboutImgElement.current);
     }
+    if(contactRef.current) {
+      observer.observe(contactRef.current);
+    }
 
     return () => observer.disconnect();
   }, [IsLargerScrenn]);
 
-  useEffect(() => {
-    console.log('Visible:', isVisible);
-  },[
-    isVisible
-  ])
   return (
     <div className={`w-full h-full flex flex-col ${IsLargerScrenn ? "mt-[5rem]" : 'items-center px-4 w-[100vw]  ' } ` }>
    <Helmet title={`home`} />
@@ -70,8 +76,8 @@ export function HomePage() {
       <div className={`mt-10 w-full h-[70vh] items-start grid ${IsLargerScrenn ? " grid-cols-2" : "grid-cols-1 mx-auto"} ${isVisible['element2'] ? "animate-SlideInFadeIn" : 'animate-SlideOut'}`} id='element2' ref={elementRef2}>
         <div className="w-ful flex pt-10 pb-10 flex-col justify-center h-[50%] mt-[5rem]">
           <h1 className={`text-muted text-[2.2rem] gap-1 w-full flex font-mono font-semibold ${IsLargerScrenn ? "text-[2.2rem]" : 'text-[1.3rem]'}`}>
-            Robson {"   "}
-           <h2 className="font-mono text-[#C778DD] ml-3">is a web designer</h2>
+            {t('HomePage.RobsonIsdeveloper')} {"   "}
+           <h2 className="font-mono text-[#C778DD] ml-3">{t('HomePage.Name')}</h2>
           </h1>
           <h1 className={`text-muted gap-1 w-full flex font-mono font-semibold ${IsLargerScrenn ? 'text-[2.2rem]' : 'text-[1.5rem]'}`}>
             and
@@ -80,12 +86,11 @@ export function HomePage() {
           </h1>
 
           <h3 className="mt-7 text-[#a2a8b4] font-[400] font-mono">
-            He crafts responsive websites where technologies meet <br />
-            creativity
+          {t('HomePage.HereCrafts')}
           </h3>
 
-          <Button variant={'outlineTwo'} className="font-mono font-semibold mt-5 w-[90%]">
-            Contate-me
+          <Button variant={'outlineTwo'} className="font-mono font-semibold mt-5 w-[90%] " asChild>
+            <a target='blank' href="https://www.instagram.com/robson_ribeiro.07/" className='text-[1.6rem] text-muted-foreground'>#Contate-me</a>
           </Button>
         </div>
 
@@ -99,7 +104,7 @@ export function HomePage() {
       <div className="w-[fit-content] mx-auto mt-[3rem]">
         <Texterea
           width={IsLargerScrenn? '50vw' : '80vw'}
-          label="With great power comes great electricity bill"
+          label={t('HomePage.WithGreat')}
           borderTop={true}
           heigth="6em"
           WithVirgula
@@ -120,7 +125,7 @@ export function HomePage() {
       {/* Seção do Scroll */}
       <div
         className={`flex items-start mt-[6rem] flex-col h-[35vw] w-full ${
-          isVisible["element1"] ? 'animate-SlideInFadeInRight' : 'opacity-0'
+          isVisible["element1"] ? 'animate-SlideInFadeInRight' : ' '
         }`}
         id='element1'
         ref={elementRef}
@@ -128,13 +133,13 @@ export function HomePage() {
         <div className="flex justify-between w-[75vw]">
           <p className="flex items-center text-white text-1xl lg:text-4xl">
             <b className="text-[#c470db]">#</b>
-            <b className="font-mono">projects</b>
+            <b className="font-mono">{t('HomePage.Projects')}</b>
             <b className={`w-[50vw] h-[2.5px] bg-[#c470db] ml-2`}></b>
           </p>
 
           {IsLargerScrenn ? (
             <p className="text-white underline cursor-pointer hover:text-muted-foreground whitespace-nowrap">
-            View all {'>'}
+            {t('HomePage.ViewAll')}
           </p>
           ): (
             <p className="text-white underline cursor-pointer hover:text-muted-foreground whitespace-nowrap">
@@ -142,12 +147,8 @@ export function HomePage() {
           </p>
           )}
         </div>
-
-        <div className="grid grid-cols-1 gap-3   h-full mt-10 lg:grid-cols-4  lg:w-[90vw]  ">
-          <ProjectsCard />
-          <ProjectsCard />
-          <ProjectsCard />
-        </div>
+        
+        <CardContents/>
 
 
       </div>
@@ -183,7 +184,7 @@ export function HomePage() {
          <div >
          <p className='flex items-center text-[#624572] text-3xl font-mono font-semibold'>#
           <p className='text-muted'>
-            about
+            {t('HomePage.AboutTitle')}
           </p>
           <p className="w-[15vw] h-[2px] bg-[#624572] ml-2"></p>
         </p>
@@ -191,24 +192,54 @@ export function HomePage() {
 
 
          <p className='mt-10 font-mono text-muted'>
-         I’m a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.
-            <br />
-            <br />
-            <br />
-          Transforming my creativity and knowledge into a websites has been my passion for over a year. I have been helping various clients to establish their presence online. I always strive to learn about the newest technologies and frameworks.
+          {t('HomePage.AboutMe')}
          </p>
          <Button variant={'secondaryTwo'} className='rounded-none mt-5'>
-          View All {'->'}
+          {t('HomePage.ViewAllAbout')}
          </Button>
        </div>
 
-       <div className={`w-full ${isVisible['bannerAbout'] ? "animate-SlideInFadeInRight" : 'opacity-0'}`} id='bannerAbout'ref={AboutImgElement}>
+       <div className={`w-full ${isVisible['bannerAbout'] ? "animate-SlideInFadeInRight" : ''}`} id='bannerAbout'ref={AboutImgElement}>
         <img src={BanneAbout} alt="" />
 
        </div>
        </div>
 
+      <div className={`${isVisible['contact'] ? "animate-SlideInFadeIn" : " "} `} id='contact' ref={contactRef}>
+        <p className='flex items-center text-3xl text-[#624572] mt-[10rem] '>#
+          <p className='text-muted mr-4' >contacts</p>
+        <p className='w-[10vw] bg-[#624572] h-1'></p>
 
+        </p>
+
+        <div className='grid grid-cols-1 place-items-start  xl:grid-cols-2 xl:place-items-end max-w-xs: gap-5 mb-10'>
+        <p className='text-[#ABB2BF] '>
+        I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me
+        </p>
+
+
+
+        <div className='flex justify-end '>
+
+          <div className='border border-[#ABB2BF] h-[8rem] w-[fit-content] px-3 round'>
+            <header className='p-3 text-muted font-mono text-start'>
+              Message me here
+            </header>
+
+            <p className='flex text-sm text-muted items-center gap-2'>
+              <Envelope/>
+               @Robsonrodriguez.007@gmai.com
+            </p>
+
+            <p className='flex text-sm text-muted items-center gap-2'> 
+              <InstagramLogo/>
+              @robson_ribeiro.07
+            </p>
+            
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
   );
 }

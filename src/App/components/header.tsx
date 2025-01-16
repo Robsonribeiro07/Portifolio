@@ -1,11 +1,17 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import LogoSvg from '../../assets/logo.svg'
 import { Nav } from './nav'
 import { List } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { SelectLanguage } from './selectLanguage'
+import { useTranslation } from 'react-i18next'
 
 export function Header() {
 
+     const {t} = useTranslation()
+   
+
+   
+    
     const resize = window.innerWidth > 768 
     return (
 
@@ -19,22 +25,12 @@ export function Header() {
                 {resize ? (
                          <nav >
                          <ul className='flex gap-10 '>
-                             <Nav to='/' label='Home'/>
-                             <Nav to='/project' label='Projeto'/>
-                             <Nav to='/about' label='About'/>
+                             <Nav to='/' label={t("Header.Home")}/>
+                             <Nav to='/project' label={t('Header.Projects')}/>
+                             <Nav to='/about' label={t('Header.About')}/>
                             
-                             <Select defaultValue='EN' >
-                                 <SelectTrigger className='bg-transparent border-none text-muted font-semibold h-7 focus:outline-none focus:ring-0 focus:ring-offset-0' >
-                                     <SelectValue  />    
-                                       
-                                 </SelectTrigger>
-                                 <SelectContent className='bg-transparent w-[50px] h-[6rem] rounded-none' >
-                                         <SelectItem  value='EN' className='text-1xl text-muted-foreground font-semibold hover:text-muted cursor-pointer'>EN</SelectItem>
-                                         <SelectItem value="BR" className='text-1xl text-muted-foreground font-semibold hover:text-muted cursor-pointer'>BR</SelectItem>
-                                     </SelectContent>
-                                     
-                             </Select>
-      
+                             
+                        <SelectLanguage/>
                          </ul>
                      </nav>
      
@@ -45,12 +41,15 @@ export function Header() {
                     <List size={32} color='white' />
                     </DropdownMenuTrigger>
 
-                    <DropdownMenuContent className='h-[40vh] bg-[#282C33]'>
+                    <DropdownMenuContent className='h-[40vh] bg-[#282C33] relative'>
                         <ul className='text-center'>
                             <Nav to='/' label='Home' className='w-full '/>
                             <Nav to='/project' label='Projeto'/>
                             <Nav to='/about' label='About'/>
                         </ul>
+                        <SelectLanguage className='absolute' />
+
+
                     </DropdownMenuContent>
                 </DropdownMenu>
 

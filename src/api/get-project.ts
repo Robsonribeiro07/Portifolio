@@ -2,15 +2,23 @@ import api from "@/lib/axios";
 
 
 export type ResponseProjects = {
-        id: number;
+        id: string;
         Title: string;
         BannerImage: string;
         Descriptions: string
-        Techs: string[];
+        Techs: string[]
+        VIDEO?:string
+        LinkSite: string
         MoreDetails: {
             Title: string;
-            Descriptions: string;
-            Image: string;
+            Descriptions: {
+                "EN": string,
+                "PT": string
+            }
+        Source: {
+            IMG: string;
+            VIDEO?: undefined;
+        };
         }[];
 }[]
 export async function GetProjects() {

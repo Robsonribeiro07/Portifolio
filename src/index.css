@@ -10,7 +10,8 @@
 }
 body {
   overflow-x: hidden;
-  background-color: #282C33
+  background-color: #282C33;
+  scroll-behavior: smooth;
 }
 
 @layer base {

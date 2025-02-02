@@ -25,7 +25,7 @@ export function Header() {
                 {resize ? (
                          <nav >
                          <ul className='flex gap-10 '>
-                             <Nav to='/' label={t("Header.Home")}/>
+                             <Nav to='/' label={t("Header.Home")} />
                              <Nav to='/project' label={t('Header.Projects')}/>
                              <Nav to='/about' label={t('Header.About')}/>
                             

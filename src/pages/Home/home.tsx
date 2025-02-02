@@ -10,6 +10,10 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Envelope, InstagramLogo } from '@phosphor-icons/react';
 import { CardContents } from './cardContentPages';
+import { GetProjects, ResponseProjects } from '@/api/get-project';
+  import { useQuery } from '@tanstack/react-query';
+import { SkeletonHome } from './components/skeletonCard';
+import { Link } from 'react-router';
 
 export function HomePage() {
   
@@ -23,6 +27,12 @@ export function HomePage() {
   const AboutImgElement = useRef<HTMLDivElement | null>(null);
   const IsLargerScrenn = window.innerWidth > 768;
   const contactRef = useRef<HTMLDivElement | null>(null);
+
+  const {data: projectsData} = useQuery<ResponseProjects>({
+    queryKey: ['projects'],
+    queryFn: GetProjects
+  })
+  
   
   useEffect(() => {
 
@@ -69,13 +79,13 @@ export function HomePage() {
   }, [IsLargerScrenn]);
 
   return (
-    <div className={`w-full h-full flex flex-col ${IsLargerScrenn ? "mt-[5rem]" : 'items-center px-4 w-[100vw]  ' } ` }>
+    <div className={`w-full h-full flex flex-col  ${IsLargerScrenn ? "mt-[5rem]" : 'items-center px-4 w-[100vw]  ' } `  }>
    <Helmet title={`home`} />
 
       {/* Seção principal */}
       <div className={`mt-10 w-full h-[70vh] items-start grid ${IsLargerScrenn ? " grid-cols-2" : "grid-cols-1 mx-auto"} ${isVisible['element2'] ? "animate-SlideInFadeIn" : 'animate-SlideOut'}`} id='element2' ref={elementRef2}>
         <div className="w-ful flex pt-10 pb-10 flex-col justify-center h-[50%] mt-[5rem]">
-          <h1 className={`text-muted text-[2.2rem] gap-1 w-full flex font-mono font-semibold ${IsLargerScrenn ? "text-[2.2rem]" : 'text-[1.3rem]'}`}>
+          <h1 className={`text-muted text-[1.5rem] gap-1 w-full flex font-mono font-semibold ${IsLargerScrenn ? "text-[2.2rem]" : 'text-[1.3rem]'}`}>
             {t('HomePage.RobsonIsdeveloper')} {"   "}
            <h2 className="font-mono text-[#C778DD] ml-3">{t('HomePage.Name')}</h2>
           </h1>
@@ -94,7 +104,7 @@ export function HomePage() {
           </Button>
         </div>
 
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center  select-none pointer-events-none">
           <img src={BannerSvg} alt="" className="w-auto h-full" />
           <img src={Banner2} alt="" className="w-[20vw] h-full" />
         </div>
@@ -124,7 +134,7 @@ export function HomePage() {
 
       {/* Seção do Scroll */}
       <div
-        className={`flex items-start mt-[6rem] flex-col h-[35vw] w-full ${
+        className={`flex  flex-1 items-start mt-[6rem] flex-col h-[35vw] w-full ${
           isVisible["element1"] ? 'animate-SlideInFadeInRight' : ' '
         }`}
         id='element1'
@@ -138,9 +148,9 @@ export function HomePage() {
           </p>
 
           {IsLargerScrenn ? (
-            <p className="text-white underline cursor-pointer hover:text-muted-foreground whitespace-nowrap">
+            <Link  to="/project#cardElement" className="text-white underline cursor-pointer hover:text-muted-foreground whitespace-nowrap">
             {t('HomePage.ViewAll')}
-          </p>
+          </Link>
           ): (
             <p className="text-white underline cursor-pointer hover:text-muted-foreground whitespace-nowrap">
             all {'>'}
@@ -148,12 +158,16 @@ export function HomePage() {
           )}
         </div>
         
-        <CardContents/>
+        {projectsData ? (
+          <CardContents/>
 
+        ): (
+          <SkeletonHome/>
+        )}
 
       </div>
 
-      <div className={` ${isVisible['elementSkill'] ? "animate-SlideInFadeIn" : ''} ${IsLargerScrenn ? 'mt-[5rem]' : 'mt-[75rem] w-[80vw]'}`} id='elementSkill' ref={SkillElement}>
+      <div className={` ${isVisible['elementSkill'] ? "animate-SlideInFadeIn" : ''} ${IsLargerScrenn ? 'mt-[5rem]' : 'mt-10 w-[80vw]'}`} id='elementSkill' ref={SkillElement}>
         <div>
         <p className='flex items-center text-[#c470db] text-3xl'>
           #

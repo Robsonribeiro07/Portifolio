@@ -119,6 +119,16 @@ module.exports = {
 			  opacity: 1,        // Fica completamente visível
 			},
 		  },
+		  showButtons: {
+			"0%": {
+			   opacity: 0,
+			},
+			"100%": {
+			   opacity: 1,
+			
+			}
+		 },
+		  
 		animation: {
 			SlideInFadeIn: 'FadeIn 1.5s ease',
 			SlideOut: "FadeOut 1s ease",
@@ -128,6 +138,7 @@ module.exports = {
 			FadeInBotton: 'fadeInBottom 1.5s ease',
 			FadeInRightFooter: 'FadeInRightFooter 1.5s ease forwards',
 			FadeInRightSS: 'FadeIns 1.5s ease ',
+			showButtons: 'showButtons 3s ease'
 		},
   		colors: {
   			background: 'hsl(var(--background))',

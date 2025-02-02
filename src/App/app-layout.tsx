@@ -5,6 +5,8 @@ import { Header } from './components/header'
 import LogoSvg from '../assets/logo.svg'
 import { useEffect, useRef, useState } from 'react'
 import { Nav } from './components/nav'
+import { ArrowDownOrUp } from '@/pages/Home/components/from-end-or-start-page'
+// import {  useHandleSwitchPageComMousedon } from '@/hooks/use-switch-page-com-Mouse-down'
 export function AppLayout() {
 
 
@@ -15,9 +17,11 @@ export function AppLayout() {
    const footerElement = useRef<HTMLDivElement | null>(null)
 
 
-   useEffect(()=> {
-      console.log(isVisible)
-   },[isVisible])
+   // const {direction} = useHandleSwitchPageComMousedon()
+
+
+   
+   
     useEffect(() => {
        
       const observer = new IntersectionObserver(
@@ -39,8 +43,10 @@ export function AppLayout() {
       return () => observer.disconnect()
     },[])
     return (
+      
         <div className={`min-h-[100vh] w-screen grid-cols-[1fr] bg-[#282C33] lg:grid-cols-[17vw_1fr] grid`}>
-
+              <ArrowDownOrUp visible={isVisible}/>
+          
 
          <div className={`w-full flex items-start pl-4 ${resize ? '' : 'sr-only'} `}>
             <div className="h-[50vh] flex flex-col items-center fixed">

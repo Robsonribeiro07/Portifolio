@@ -5,8 +5,14 @@ const RenderApiURl = import.meta.env.VITE_API_URL_RENDER
 
 const delay = import.meta.env.VITE_DELAY
 
+const apiLocal = import.meta.env.VITE_API_URL_KEY
+
+const Mode = import.meta.env.VITE_MODE_PROD
+
+
+const ModeSelect = Mode === "True" ? RenderApiURl : apiLocal;
 const api = axios.create({
-    baseURL: RenderApiURl
+    baseURL: ModeSelect
 })
 
 if(delay === "TRUE"){
